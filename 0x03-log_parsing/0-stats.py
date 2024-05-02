@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-'''A script for parsing HTTP request logs.
+'''
+A script for parsing HTTP request logs.
 '''
 
 import re
@@ -14,7 +15,7 @@ def parse_log_line(request_line: str) -> Optional[Dict[str, int]]:
 
     Returns:
         dict: A dictionary containing extracted information or None
-              if the line format is invalid.
+        if the line format is invalid.
     '''
     field_patterns = (
         r'\s*(?P<ip>\S+)\s*',
@@ -44,7 +45,7 @@ def print_statistics(total_processed_size: int,
     Args:
         total_processed_size (int): The total size of processed files.
         status_code_counts (dict): A dictionary containing counts
-                                  for each status code.
+        for each status code.
     '''
     print('File size: {:d}'.format(total_processed_size), flush=True)
     for status_code in sorted(status_code_counts.keys()):
@@ -61,7 +62,7 @@ def update_metrics(line: str, total_processed_size: int,
         line (str): The line of input from which to retrieve the metrics.
         total_processed_size (int): The current total file size.
         status_code_counts (dict): A dictionary containing counts
-                                  for each status code.
+        for each status code.
 
     Returns:
         int: The new total file size.
