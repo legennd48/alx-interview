@@ -24,7 +24,7 @@ def parse_log_line(request_line: str) -> Optional[Dict[str, int]]:
         r'\s*(?P<status_code>\S+)',
         r'\s*(?P<file_size>\d+)'
     )
-    info = {
+    info: Dict[str, int] = {
         'status_code': 0,
         'file_size': 0,
     }
@@ -81,7 +81,7 @@ def main() -> None:
     '''
     line_number = 0
     total_processed_size = 0
-    status_code_counts: = {
+    status_code_counts: Dict[str, int] = {
         '200': 0,
         '301': 0,
         '400': 0,
