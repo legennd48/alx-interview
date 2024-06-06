@@ -24,23 +24,16 @@ def makeChange(coins, total):
     if not all(coin > 0 for coin in coins):
         raise ValueError("Coin values must be integers greater than 0.")
 
-    # Efficiently sort coins in descending 
-    coins.sort(reverse=True)
-
     # Create a table to store minimum coin counts for all amounts up to `total`
     dp = [float('inf')] * (total + 1)
     dp[0] = 0  # Base case: 0 amount requires 0 coins
 
-    # Iterate through all possible amounts up to `total`
-    for amount in range(1, total + 1):
-        # Consider using each coin in descending order
-        for coin in coins:
-            # If the coin value is less than or equal to the current amount
-            if coin <= amount:
-                # Update `dp[amount]`
-                dp[amount] = min(dp[amount], dp[amount - coin] + 1)
-                if dp[amount] != float('inf'):
-                    break
+    # Iterate through all possible coin values
+    for coin in coins:
+        # For each amount `i` up to `total`, consider using the current coin
+        for i in range(coin, total + 1):
+            # Update `dp[i]`
+            dp[i] = min(dp[i], dp[i - coin] + 1)
 
     # Return the minimum coin count for the target amount (`total`)
     return dp[total] if dp[total] != float('inf') else -1
